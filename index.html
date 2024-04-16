@@ -6,8 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20240411144101">
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="css/style.min.css?_v=20240416153854">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -29,20 +28,20 @@
 								<div class="map__from">
 									<p class="map-from__description">Звідки</p>
 									<div class="map__firstCitySelect">
-										<select id="firstCitySelect">
-											<option value="">Оберіть місто</option>
-											<option value="Хелм">Хелм</option>
-											<option value="Львів">Львів</option>
-											<option value="Ужгород">Ужгород</option>
-											<option value="Варшава">Варшава</option>
-											<option value="Перемшиль">Перемшиль</option>
-											<option value="Жешув">Жешув</option>
-											<option value="Краків">Краків</option>
-											<option value="Катовіце">Катовіце</option>
-											<option value="Кошіце">Кошіце</option>
-											<option value="Дебрецен">Дебрецен</option>
-											<option value="Будапешт">Будапешт</option>
-											<option value="Відень">Відень</option>
+										<select id="cityList1">
+											<option value="default">Оберіть місто</option>
+											<option value="helm">Хелм</option>
+											<option value="lviv">Львів</option>
+											<option value="uzhhorod">Ужгород</option>
+											<option value="varshava">Варшава</option>
+											<option value="permshil">Перемшиль</option>
+											<option value="zheshuv">Жешув</option>
+											<option value="krakiv">Краків</option>
+											<option value="katovice">Катовіце</option>
+											<option value="koshice">Кошіце</option>
+											<option value="debrecen">Дебрецен</option>
+											<option value="budapest">Будапешт</option>
+											<option value="viden">Відень</option>
 											<span class="arrow"></span>
 											<!-- Додайте більше опцій за потреби -->
 										</select>
@@ -52,19 +51,20 @@
 								<div class="map__to">
 									<p class="map-to__description">Куди</p>
 									<div class="map__secondCitySelect">
-										<select id="secondCitySelect">
-											<option value="">Оберіть місто</option>
-											<option value="Хелм">Хелм</option>
-											<option value="Львів">Львів</option>
-											<option value="Ужгород">Ужгород</option>
-											<option value="Перемшиль">Перемшиль</option>
-											<option value="Жешув">Жешув</option>
-											<option value="Краків">Краків</option>
-											<option value="Катовіце">Катовіце</option>
-											<option value="Кошіце">Кошіце</option>
-											<option value="Дебрецен">Дебрецен</option>
-											<option value="Будапешт">Будапешт</option>
-											<option value="Відень">Відень</option>
+										<select id="cityList2">
+											<option value="default">Оберіть місто</option>
+											<option value="helm">Хелм</option>
+											<option value="lviv">Львів</option>
+											<option value="uzhhorod">Ужгород</option>
+											<option value="varshava">Варшава</option>
+											<option value="permshil">Перемшиль</option>
+											<option value="zheshuv">Жешув</option>
+											<option value="krakiv">Краків</option>
+											<option value="katovice">Катовіце</option>
+											<option value="koshice">Кошіце</option>
+											<option value="debrecen">Дебрецен</option>
+											<option value="budapest">Будапешт</option>
+											<option value="viden">Відень</option>
 											<!-- Додайте більше опцій за потреби -->
 										</select>
 									</div>
@@ -80,25 +80,9 @@
 						</div>
 					</div>
 
-					<div class="map-container">
+					<div id="map" class="map-container">
 						<img src="img/map.png" alt="Інтерактивна карта">
-						<!-- Маркери локацій -->
-						<div class="map-marker helm" data-city="Хелм"></div>
-						<div class="map-marker lviv" data-city="Львів"></div>
-						<div class="map-marker uzhhorod" data-city="Ужгород"></div>
-						<div class="map-marker varshava" data-city="Варшава"></div>
-						<div class="map-marker permshil" data-city="Перемшиль"></div>
-						<div class="map-marker zheshuv" data-city="Жешув"></div>
-						<div class="map-marker krakiv" data-city="Краків"></div>
-						<div class="map-marker katovice" data-city="Катовіце"></div>
-						<div class="map-marker koshice" data-city="Кошіце"></div>
-						<div class="map-marker debrecen" data-city="Дебрецен"></div>
-						<div class="map-marker budapest" data-city="Будапешт"></div>
-						<div class="map-marker viden" data-city="Відень"></div>
-						<!-- Картинки доріг -->
-						<img class="road-image" id="kyiv-lviv" src="img/uzhhorod-budapest.svg" alt="Дорога Хелм-Львів">
-						<img class="road-image" id="kyiv-odesa" src="img/uzhhorod-kosice.svg" alt="Дорога Київ-Одеса">
-						<!-- Додайте більше картинок доріг за потреби -->
+
 					</div>
 				</div>
 			</section>
@@ -109,90 +93,89 @@
 		</footer>
 	</div>
 	<script>
-		// Функція для підсвічування або ховання маркерів
-		function toggleMarkerHighlight(city, highlight) {
-			document.querySelectorAll('.map-marker').forEach(function(marker) {
-				if (marker.getAttribute('data-city') === city) {
-					if (highlight) {
-						marker.classList.add('highlighted');
-					} else {
-						marker.classList.remove('highlighted');
-					}
-				}
-			});
+		const map = document.getElementById('map');
+		const marker1 = createMarker();
+		const marker2 = createMarker();
+
+		document.getElementById('cityList1').addEventListener('change', (event) => {
+			highlightMarker(marker1, event.target.value);
+		});
+
+		document.getElementById('cityList2').addEventListener('change', (event) => {
+			highlightMarker(marker2, event.target.value);
+		});
+
+		function createMarker() {
+			const marker = document.createElement('div');
+			marker.className = 'marker hide';
+			map.appendChild(marker);
+			return marker;
 		}
 
-		// Функція для показу відповідної картинки дороги
-		function showRoadImage(firstCity, secondCity) {
-			// Сховати всі картинки доріг
-			document.querySelectorAll('.road-image').forEach(function(img) {
-				img.style.display = 'none';
-			});
-
-			// Показати картинку дороги, якщо обидва міста вибрані
-			let roadId = firstCity.toLowerCase() + '-' + secondCity.toLowerCase();
-			let roadImage = document.getElementById(roadId);
-			if (roadImage) {
-				roadImage.style.display = 'block';
+		function highlightMarker(marker, city) {
+			const markers = document.querySelectorAll('.marker');
+			markers.forEach((m) => m.classList.remove('highlighted'));
+			if (city !== 'default') {
+				marker.classList.add('highlighted');
+				marker.classList.remove('hide');
+				// Position the marker based on the selected city (you can use actual coordinates here)
+				switch (city) {
+					case 'helm':
+						marker.style.left = '510px';
+						marker.style.top = '240px';
+						break;
+					case 'lviv':
+						marker.style.left = '644px';
+						marker.style.top = '356px';
+						break;
+					case 'uzhhorod':
+						marker.style.left = '555px';
+						marker.style.top = '473px';
+						break;
+					case 'varshava':
+						marker.style.left = '333px';
+						marker.style.top = '113px';
+						break;
+					case 'permshil':
+						marker.style.left = '446px';
+						marker.style.top = '335px';
+						break;
+					case 'zheshuv':
+						marker.style.left = '354px';
+						marker.style.top = '283px';
+						break;
+					case 'krakiv':
+						marker.style.left = '221px';
+						marker.style.top = '246px';
+						break;
+					case 'katovice':
+						marker.style.left = '97px';
+						marker.style.top = '174px';
+						break;
+					case 'koshice':
+						marker.style.left = '394px';
+						marker.style.top = '445px';
+						break;
+					case 'debrecen':
+						marker.style.left = '414px';
+						marker.style.top = '612px';
+						break;
+					case 'budapest':
+						marker.style.left = '270px';
+						marker.style.top = '640px';
+						break;
+					case 'viden':
+						marker.style.left = '72px';
+						marker.style.top = '507px';
+						break;
+				}
+			} else {
+				// Hide the marker if no city is selected
+				marker.classList.add('hide');
+				marker.classList.remove('highlighted');
 			}
 		}
-
-		// Обробник подій для випадаючих списків
-		document.querySelectorAll('select').forEach(function(select) {
-			select.addEventListener('change', function() {
-				// Отримуємо вибрані міста з обох списків
-				let firstCity = document.getElementById('firstCitySelect').value;
-				let secondCity = document.getElementById('secondCitySelect').value;
-
-				// Підсвічуємо або ховаємо маркери в залежності від вибору
-				toggleMarkerHighlight(this.value, this.value !== '');
-
-				// Якщо одне з міст було знято з вибору, ховаємо підсвітку
-				if (this.value === '') {
-					toggleMarkerHighlight(firstCity, firstCity !== '');
-					toggleMarkerHighlight(secondCity, secondCity !== '');
-				}
-
-				// Показуємо або ховаємо картинку дороги
-				showRoadImage(firstCity, secondCity);
-			});
-		});
-
-		// Обробник подій для маркерів на карті
-		document.querySelectorAll('.map-marker').forEach(function(marker) {
-			marker.addEventListener('click', function() {
-				var city = marker.getAttribute('data-city');
-				var firstCitySelect = document.getElementById('firstCitySelect');
-				var secondCitySelect = document.getElementById('secondCitySelect');
-
-				// Перевіряємо, чи місто вже вибране у одному з списків
-				if (firstCitySelect.value === city || secondCitySelect.value === city) {
-					// Якщо місто вже вибране, знімаємо вибір
-					if (firstCitySelect.value === city) firstCitySelect.value = '';
-					if (secondCitySelect.value === city) secondCitySelect.value = '';
-					toggleMarkerHighlight(city, false);
-				} else {
-					// Якщо місто не вибране, вибираємо його в першому доступному списку
-					if (!firstCitySelect.value) {
-						firstCitySelect.value = city;
-						toggleMarkerHighlight(city, true);
-					} else if (!secondCitySelect.value) {
-						secondCitySelect.value = city;
-						toggleMarkerHighlight(city, true);
-					} else {
-						// Якщо обидва списки вже мають вибрані міста, знімаємо вибір з першого міста
-						toggleMarkerHighlight(firstCitySelect.value, false);
-						firstCitySelect.value = city; // Вибираємо нове місто
-						toggleMarkerHighlight(city, true);
-					}
-				}
-
-				// Показуємо або ховаємо картинку дороги
-				showRoadImage(firstCitySelect.value, secondCitySelect.value);
-			});
-		});
 	</script>
-	<script src="js/app.min.js?_v=20240411144101"></script>
 </body>
 
 </html>

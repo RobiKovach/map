@@ -126,6 +126,9 @@ h6 {
   overflow: hidden;
   height: 768px
 }
+.map #map {
+  position: relative
+}
 .map__container {
   display: flex;
   margin-left: 296px;
@@ -292,16 +295,18 @@ h6 {
   -webkit-transform: translateY(-72px);
   transform: translateY(-72px)
 }
-.map-marker {
-  position: absolute;
-  cursor: pointer;
-  width: 40px;
-  height: 40px
-}
 .highlighted {
+  display: flex
+}
+.hide {
+  display: none
+}
+.marker {
+  position: absolute;
   width: 40px;
   height: 40px;
-  background: url(../img/MapPin.svg)
+  background: url(../img/MapPin.svg);
+  transition: all .2s ease-in-out
 }
 .road-image {
   display: none;
@@ -316,8 +321,8 @@ h6 {
   left: 510px
 }
 .lviv {
-  top: 357px;
-  left: 643px
+  top: 356px;
+  left: 644px
 }
 .uzhhorod {
   top: 473px;
